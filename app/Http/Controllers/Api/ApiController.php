@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-
 
 class ApiController extends Controller
 {
@@ -161,4 +162,253 @@ class ApiController extends Controller
             "message" => "Logged out successfully",
             "Token data" => $token
         ]);
-    }}
+    }
+
+    // Articles Methods
+    public function getAllArticles()
+    {
+        try {
+            $articles = Article::with('category')->get();
+            return response()->json([
+                'status' => true,
+                'message' => 'Articles retrieved successfully',
+                'data' => $articles
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to retrieve articles',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getArticle($id)
+    {
+        try {
+            $article = Article::with('category')->findOrFail($id);
+            return response()->json([
+                'status' => true,
+                'message' => 'Article retrieved successfully',
+                'data' => $article
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Article not found',
+                'error' => $e->getMessage()
+            ], 404);
+        }
+    }
+
+    public function createArticle(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $article = Article::create([
+                'title' => $request->title,
+                'content' => $request->content,
+                'category_id' => $request->category_id,
+                'user_id' => auth()->id()
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Article created successfully',
+                'data' => $article
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to create article',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function updateArticle(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $article = Article::findOrFail($id);
+            $article->update($request->all());
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Article updated successfully',
+                'data' => $article
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to update article',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function deleteArticle($id)
+    {
+        try {
+            $article = Article::findOrFail($id);
+            $article->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Article deleted successfully'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to delete article',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // Categories Methods
+    public function getAllCategories()
+    {
+        try {
+            $categories = Category::with('articles')->get();
+            return response()->json([
+                'status' => true,
+                'message' => 'Categories retrieved successfully',
+                'data' => $categories
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to retrieve categories',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getCategory($id)
+    {
+        try {
+            $category = Category::with('articles')->findOrFail($id);
+            return response()->json([
+                'status' => true,
+                'message' => 'Category retrieved successfully',
+                'data' => $category
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Category not found',
+                'error' => $e->getMessage()
+            ], 404);
+        }
+    }
+
+    public function createCategory(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255|unique:categories',
+            'description' => 'nullable|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $category = Category::create($request->all());
+            return response()->json([
+                'status' => true,
+                'message' => 'Category created successfully',
+                'data' => $category
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to create category',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function updateCategory(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255|unique:categories,name,'.$id,
+            'description' => 'nullable|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $category = Category::findOrFail($id);
+            $category->update($request->all());
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Category updated successfully',
+                'data' => $category
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to update category',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function deleteCategory($id)
+    {
+        try {
+            $category = Category::findOrFail($id);
+            $category->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Category deleted successfully'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to delete category',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+}
