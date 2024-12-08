@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+
 
 class ApiController extends Controller
 {
@@ -60,8 +62,59 @@ class ApiController extends Controller
         }
     }
     // POST [email, password]
-    public function login(Request $request){
+    public function login(Request $request)
+    {
+        // Using validator for better error handling
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email:rfc,dns|max:255',
+            'password' => 'required|string|min:6'
+        ]);
 
+        // If validation fails, return error response
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            // Find user by email
+            $user = User::where('email', $request->email)->first();
+
+            // Check if user exists and password is correct
+            if (!$user || !Hash::check($request->password, $user->password)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Invalid credentials'
+                ], 401);
+            }
+
+            // Generate token
+            $token = $user->createToken('auth_token')->accessToken;
+
+            // Return success response
+            return response()->json([
+                'status' => true,
+                'message' => 'Login successful',
+                'data' => [
+                    'user' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email
+                    ],
+                    'token' => $token
+                ]
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Login failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
     // GET [Auth:Token]
     public function profile(Request $request){
