@@ -9,7 +9,7 @@ class ApiController extends Controller
 {
     // POST [name, email, password]
     public function register(Request $request){
-
+        yes
     }
     // POST [email, password]
     public function login(Request $request){
