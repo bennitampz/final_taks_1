@@ -168,7 +168,7 @@ class ApiController extends Controller
     public function getAllArticles()
     {
         try {
-            $articles = Article::with('category')->get();
+            $articles = Article::with('category')->paginate(10); // 10 items per page
             return response()->json([
                 'status' => true,
                 'message' => 'Articles retrieved successfully',
