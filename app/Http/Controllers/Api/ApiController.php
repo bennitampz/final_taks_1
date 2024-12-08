@@ -64,13 +64,11 @@ class ApiController extends Controller
     // POST [email, password]
     public function login(Request $request)
     {
-        // Using validator for better error handling
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email:rfc,dns|max:255',
             'password' => 'required|string|min:6'
         ]);
 
-        // If validation fails, return error response
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
@@ -80,10 +78,8 @@ class ApiController extends Controller
         }
 
         try {
-            // Find user by email
             $user = User::where('email', $request->email)->first();
 
-            // Check if user exists and password is correct
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json([
                     'status' => false,
@@ -91,10 +87,8 @@ class ApiController extends Controller
                 ], 401);
             }
 
-            // Generate token
             $token = $user->createToken('auth_token')->accessToken;
 
-            // Return success response
             return response()->json([
                 'status' => true,
                 'message' => 'Login successful',
@@ -102,7 +96,10 @@ class ApiController extends Controller
                     'user' => [
                         'id' => $user->id,
                         'name' => $user->name,
-                        'email' => $user->email
+                        'email' => $user->email,
+                        'created_at' => $user->created_at,
+                        'updated_at' => $user->updated_at,
+                        'last_login' => now()
                     ],
                     'token' => $token
                 ]
@@ -117,8 +114,42 @@ class ApiController extends Controller
         }
     }
     // GET [Auth:Token]
-    public function profile(Request $request){
+    public function profile(Request $request)
+    {
+        try {
+            // Get authenticated user
+            $userData = $request->user();
 
+            // Verify if user exists and is authenticated
+            if (!$userData) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'User not authenticated'
+                ], 401);
+            }
+
+            // Return user profile data with success response
+            return response()->json([
+                'status' => true,
+                'message' => 'Profile retrieved successfully',
+                'data' => [
+                    'user' => [
+                        'id' => $userData->id,
+                        'name' => $userData->name,
+                        'email' => $userData->email,
+                        'created_at' => $userData->created_at,
+                        'updated_at' => $userData->updated_at
+                    ]
+                ]
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to retrieved  profile',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
     // GET [Auth:Token]
     public function logout(Request $request){
