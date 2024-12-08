@@ -152,7 +152,13 @@ class ApiController extends Controller
         }
     }
     // GET [Auth:Token]
-    public function logout(Request $request){
-
-    }
-}
+    public function logout(Request $request)
+    {
+        $token = $request->user()->token();
+        $token->revoke();
+        return response()->json([
+            "status" => true,
+            "message" => "Logged out successfully",
+            "Token data" => $token
+        ]);
+    }}
