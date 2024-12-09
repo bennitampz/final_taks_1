@@ -10,8 +10,8 @@ class Article extends Model
         'title',
         'content',
         'category_id',
-        'updated_at',
-        'created_at'
+        'user_id',
+        'image'
     ];
 
     // Relationship with Category

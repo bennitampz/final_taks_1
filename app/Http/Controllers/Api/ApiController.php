@@ -206,7 +206,8 @@ class ApiController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($validator->fails()) {
@@ -218,11 +219,23 @@ class ApiController extends Controller
         }
 
         try {
+            $imagePath = null;
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/articles'), $imageName);
+                $imagePath = 'images/articles/' . $imageName;
+            }
+
+            // Get the authenticated user's ID
+            $userId = auth()->id();
+
             $article = Article::create([
                 'title' => $request->title,
                 'content' => $request->content,
                 'category_id' => $request->category_id,
-                'user_id' => auth()->id()
+                'user_id' => $userId,
+                'image' => $imagePath
             ]);
 
             return response()->json([
@@ -237,14 +250,13 @@ class ApiController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
-    }
-
-    public function updateArticle(Request $request, $id)
+    }    public function updateArticle(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($validator->fails()) {
@@ -257,7 +269,26 @@ class ApiController extends Controller
 
         try {
             $article = Article::findOrFail($id);
-            $article->update($request->all());
+
+            // Handle image update
+            if ($request->hasFile('image')) {
+                // Delete old image if exists
+                if ($article->image && file_exists(public_path($article->image))) {
+                    unlink(public_path($article->image));
+                }
+
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/articles'), $imageName);
+                $article->image = 'images/articles/' . $imageName;
+            }
+
+            $article->update([
+                'title' => $request->title,
+                'content' => $request->content,
+                'category_id' => $request->category_id,
+                'user_id' => auth()->id()
+            ]);
 
             return response()->json([
                 'status' => true,
@@ -272,11 +303,16 @@ class ApiController extends Controller
             ], 500);
         }
     }
-
     public function deleteArticle($id)
     {
         try {
             $article = Article::findOrFail($id);
+
+            // Delete associated image if exists
+            if ($article->image && file_exists(public_path($article->image))) {
+                unlink(public_path($article->image));
+            }
+
             $article->delete();
 
             return response()->json([
@@ -333,7 +369,7 @@ class ApiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:categories',
-            'description' => 'nullable|string'
+            'user_id' => 'required|exists:users,id'
         ]);
 
         if ($validator->fails()) {
@@ -364,7 +400,7 @@ class ApiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:categories,name,'.$id,
-            'description' => 'nullable|string'
+            'user_id' => 'required|exists:users,id'
         ]);
 
         if ($validator->fails()) {
