@@ -99,10 +99,14 @@ Recipe Hub yang dibuat menggunakan laravel dilengkapi dengan fitur-fitur baru se
 
 ## Penggunaan
 
-Jalankan server pengembangan:
+    Jalankan server pengembangan:
 
 ```bash
 php artisan serve
 ```
 
-Buka http://localhost:8000 di browser Anda.
+    Buka http://localhost:8000 di browser Anda.
+
+
+## Fitur
+# jwt authentication menggunakan laravel passport
