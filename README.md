@@ -1,6 +1,6 @@
 # Final_Project_first
 
-Deskripsi singkat tentang proyek Anda.
+Final project Pada pelaksanaan program Virtual Internship Experience ini, teman-teman akan diberikan gambaran tentang bagaimana seorang Fullstack Developer bekerja di Investree.
 
 ## Daftar Isi
 
@@ -15,22 +15,22 @@ Deskripsi singkat tentang proyek Anda.
 
 ## Tentang Proyek
 
-Berikan deskripsi mendetail tentang proyek Anda, tujuan, dan fungsionalitas utama.
+Recipe Hub yang dibuat menggunakan laravel dilengkapi dengan fitur-fitur baru seperti akun pengguna, pembuatan resep, dan detail resep yang mencakup daftar bahan dan instruksi. Antarmuka pengguna telah diperbaiki dengan desain yang lebih menarik, sehingga pengalaman pengguna menjadi lebih baik berkat penggunaan Javascript untuk pembaruan konten yang dinamis. Bagian belakang sistem juga telah ditingkatkan dengan menggunakan RESTful API dari Laravel untuk pengelolaan data yang lebih efisien. Selain itu, Laravel UI terus dikembangkan untuk mendukung otentikasi pengguna dan komponen antarmuka pengguna yang dasar.
 
 ## Persyaratan Sistem
 
-- PHP versi X.X atau lebih tinggi
+- PHP versi 8.2 atau lebih tinggi
 - Composer
 - NPM atau Yarn
-- Database (MySQL, PostgreSQL, dll.)
-- Web Server (Apache, Nginx, dll.)
+- Database Mysql
+- Web Server XAMPP
 
 ## Instalasi
 
 1. **Clone repositori**
 
     ```bash
-    git clone https://github.com/username/Final_Project_first.git
+    git clone https://github.com/bennitampz/final_taks_1
     ```
 
 2. **Masuk ke direktori proyek**
@@ -77,11 +77,13 @@ Berikan deskripsi mendetail tentang proyek Anda, tujuan, dan fungsionalitas utam
 
 8. **Migrasi database**
 
+   Atau import dari database yang telah disediakan di final_taks_1 dengan nama restapi_laravel_passport_benni.sql
+    
     ```bash
     php artisan migrate
     ```
 
-9. **Build aset frontend**
+10. **Build aset frontend**
 
     Untuk environment pengembangan:
 
