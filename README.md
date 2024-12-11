@@ -110,6 +110,15 @@ php artisan serve
 
 ## Fitur
 ### A. jwt authentication menggunakan laravel passport
-
+A. Registration
+Registration success with JWT token
 ![Screenshot 2024-12-11 231258](https://github.com/user-attachments/assets/43b95178-40a0-48e8-8307-b3b43ed1bb03)
+
+B. Login
+Login success with JWT token
+![Screenshot 2024-12-11 232018](https://github.com/user-attachments/assets/d21d5ea6-9780-4cea-9db2-59211ea90896)
+
+C. Profile
+Profile retrieved successfully
+![Screenshot 2024-12-11 232355](https://github.com/user-attachments/assets/cac0fe16-539b-4d45-a632-e14cb331d22a)
 
