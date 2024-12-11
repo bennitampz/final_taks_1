@@ -109,4 +109,7 @@ php artisan serve
 
 
 ## Fitur
-### jwt authentication menggunakan laravel passport
+### A. jwt authentication menggunakan laravel passport
+
+![Screenshot 2024-12-11 231258](https://github.com/user-attachments/assets/43b95178-40a0-48e8-8307-b3b43ed1bb03)
+
