@@ -108,7 +108,7 @@ php artisan serve
     Buka http://localhost:8000 di browser Anda.
 
 
-## Fitur
+## Testing using Postman
 ### A. jwt authentication menggunakan laravel passport
 A. Registration
 Registration success with JWT token
@@ -121,4 +121,11 @@ Login success with JWT token
 C. Profile
 Profile retrieved successfully
 ![Screenshot 2024-12-11 232355](https://github.com/user-attachments/assets/cac0fe16-539b-4d45-a632-e14cb331d22a)
+
+D. Logout
+Logged out successfully
+![Screenshot 2024-12-11 232716](https://github.com/user-attachments/assets/06ae7167-3c4b-45d4-9951-db4145985d08)
+
+### B. buatlah restful api posts (create, list all, show detail, update & delete)
+A. Create
 
