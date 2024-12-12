@@ -9,9 +9,8 @@ Final project Pada pelaksanaan program Virtual Internship Experience ini, teman-
 - [Instalasi](#instalasi)
 - [Penggunaan](#penggunaan)
 - [Fitur](#fitur)
-- [Kontribusi](#kontribusi)
-- [Lisensi](#lisensi)
-- [Kontak](#kontak)
+- [If you have some suggestion](#If you have some suggestion)
+- [License](#License)
 
 ## Tentang Proyek
 
@@ -181,5 +180,11 @@ A. Articles
 B. Categories
 ![{76C53D45-A287-4EC7-9D42-1ACA904C2B48}](https://github.com/user-attachments/assets/475013ef-acc8-43eb-9561-14b3dddcf865)
 
+## If you have some suggestion
+Just Contact Me At: 
 
+Email: bennitampu@gmail.com
+Instagram: @bennitpbln_404_emgcy
 
+## License
+Laravel framework are open-sourced software licensed under the MIT license
