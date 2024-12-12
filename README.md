@@ -138,3 +138,13 @@ E. Delete
 Article deleted successfully
 ![{BAB77BB3-D541-47B4-97D0-5016B1D056C1}](https://github.com/user-attachments/assets/173086c2-3737-4285-966e-b82c447997d0)
 
+### B. Gunakan mekanisme middleware auth api passport ke endpoint posts (create, list all, show detail, update dan delete) 
+![Screenshot 2024-12-12 115504](https://github.com/user-attachments/assets/a01d4ac8-d715-4644-9db2-165bda0f83fd)
+
+### C. Gunakan prefix versi pada api yang telah dibuat (contoh : api/v1)
+A. Telah menggunakan prefix v1
+![{BC578F42-640F-4E8C-91BA-18DBEF3BFEE3}](https://github.com/user-attachments/assets/8cd63401-f1e8-40ac-9702-18cc8ea6ab6a)
+![{828F2DE8-FE6C-49B1-AFAE-C67551F1EE4B}](https://github.com/user-attachments/assets/7c854110-f154-467d-94f2-921fcdfda616)
+
+
+
