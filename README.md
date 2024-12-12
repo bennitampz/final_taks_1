@@ -15,7 +15,7 @@ Final project Pada pelaksanaan program Virtual Internship Experience ini, teman-
 
 ## Tentang Proyek
 
-Recipe Hub yang dibuat menggunakan laravel dilengkapi dengan fitur-fitur baru seperti akun pengguna, pembuatan resep, dan detail resep yang mencakup daftar bahan dan instruksi. Antarmuka pengguna telah diperbaiki dengan desain yang lebih menarik, sehingga pengalaman pengguna menjadi lebih baik berkat penggunaan Javascript untuk pembaruan konten yang dinamis. Bagian belakang sistem juga telah ditingkatkan dengan menggunakan RESTful API dari Laravel untuk pengelolaan data yang lebih efisien. Selain itu, Laravel UI terus dikembangkan untuk mendukung otentikasi pengguna dan komponen antarmuka pengguna yang dasar.
+Project yang diberikan oleh Investree untuk menunjukkan bagaimana seorang fullstack membangun rest api dan oauth token menggunakan laravel framework serta laravel passport 
 
 ## Persyaratan Sistem
 
@@ -142,9 +142,12 @@ Article deleted successfully
 ![Screenshot 2024-12-12 115504](https://github.com/user-attachments/assets/a01d4ac8-d715-4644-9db2-165bda0f83fd)
 
 ### C. Gunakan prefix versi pada api yang telah dibuat (contoh : api/v1)
+
 A. Telah menggunakan prefix v1
 ![{BC578F42-640F-4E8C-91BA-18DBEF3BFEE3}](https://github.com/user-attachments/assets/8cd63401-f1e8-40ac-9702-18cc8ea6ab6a)
 ![{828F2DE8-FE6C-49B1-AFAE-C67551F1EE4B}](https://github.com/user-attachments/assets/7c854110-f154-467d-94f2-921fcdfda616)
+
+### D. Gunakan pagination pada api list all posts
 
 
 
