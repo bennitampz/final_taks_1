@@ -83,20 +83,6 @@ Recipe Hub yang dibuat menggunakan laravel dilengkapi dengan fitur-fitur baru se
     php artisan migrate
     ```
 
-10. **Build aset frontend**
-
-    Untuk environment pengembangan:
-
-    ```bash
-    npm run dev
-    ```
-
-    atau untuk production:
-
-    ```bash
-    npm run build
-    ```
-
 ## Penggunaan
 
     Jalankan server pengembangan:
@@ -119,7 +105,7 @@ Login success with JWT token
 ![Screenshot 2024-12-11 232018](https://github.com/user-attachments/assets/d21d5ea6-9780-4cea-9db2-59211ea90896)
 
 C. Profile
-Profile retrieved successfully
+Profile retrieved successfully using JWT Token for auth
 ![Screenshot 2024-12-11 232355](https://github.com/user-attachments/assets/cac0fe16-539b-4d45-a632-e14cb331d22a)
 
 D. Logout
@@ -128,4 +114,14 @@ Logged out successfully
 
 ### B. buatlah restful api posts (create, list all, show detail, update & delete)
 A. Create
-
+Article created successfully 
+![Screenshot 2024-12-12 092303](https://github.com/user-attachments/assets/9505ea7c-0156-431f-a658-a324f74196ec)
+B. List all
+Articles retrieved successfully from all Articles
+![Screenshot 2024-12-12 092721](https://github.com/user-attachments/assets/afa6aaeb-b6f8-472a-904f-c7c9d1e385e4)
+C.Show detail
+Article retrieved successfully by id of Article
+![Screenshot 2024-12-12 093233](https://github.com/user-attachments/assets/96cd3389-a623-482d-9db3-7a71ab086906)
+D. Update
+Article updated successfully
+![Screenshot 2024-12-12 093954](https://github.com/user-attachments/assets/03a156ff-0847-425b-82cb-cafd9d651396)
