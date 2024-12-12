@@ -45,16 +45,10 @@ Project yang diberikan oleh Investree untuk menunjukkan bagaimana seorang fullst
     composer install
     ```
 
-4. **Install dependensi Node.js**
+4. **Install Passport Client token**
 
     ```bash
-    npm install
-    ```
-
-    atau jika menggunakan Yarn:
-
-    ```bash
-    yarn
+    php artisan passport:client --personal
     ```
 
 5. **Salin file konfigurasi**
@@ -148,6 +142,44 @@ A. Telah menggunakan prefix v1
 ![{828F2DE8-FE6C-49B1-AFAE-C67551F1EE4B}](https://github.com/user-attachments/assets/7c854110-f154-467d-94f2-921fcdfda616)
 
 ### D. Gunakan pagination pada api list all posts
+Article and Category retrieved successfully with pagination at all post
+
+![Screenshot 2024-12-12 161646](https://github.com/user-attachments/assets/7d1b2062-7984-4eb4-9336-e300377d0a23)
+
+### E. Unit testing untuk setiap api posts
+A. POST v1/api/register - untuk registrasi user
+![{1CF31948-0874-4871-8BBA-380DC8AF564E}](https://github.com/user-attachments/assets/b85dc92b-bb2b-4fef-b57c-bcd77f18f083)
+
+B. POST v1/api/login - untuk login user
+![{5CFC081F-ABC2-4547-B395-BE814A707E23}](https://github.com/user-attachments/assets/ccc27f11-c2bc-40d4-9115-cf8bd9e66793)
+
+C. GET v1/api/profile - untuk melihat profil
+![{EC5A9820-3046-4930-9ADD-7CBFE86E511C}](https://github.com/user-attachments/assets/b92ce2aa-f807-45bf-aca4-484e1cf457d0)
+
+D. GET v1/api/logout - untuk logout
+![{8BF2F3AC-1863-4543-A1F1-AEAE5CB5B5FF}](https://github.com/user-attachments/assets/2a8687da-fac7-420a-b599-5c90aaf4cc0c)
+
+E. GET v1/api/articles - untuk mendapatkan semua artikel
+![{E0B876D2-F172-4FB5-8025-CA0F71F1E76D}](https://github.com/user-attachments/assets/5fb8b646-6e0b-4685-b781-404adc289c71)
+
+F. POST v1/api/articles - untuk membuat artikel baru
+![{907DB1FB-84F6-4EEB-A27F-362D264D5E26}](https://github.com/user-attachments/assets/6185dd06-f533-4c2c-b69c-ffd029e04eb5)
+
+G. GET /api/articles/{id} - untuk mendapatkan detail artikel
+![{8BD78D70-6488-4F31-97CD-DBABF0E51EDB}](https://github.com/user-attachments/assets/00cb6ed4-83e8-4924-bce8-7a27abb3990e)
+
+H. PUT /api/articles/{id} - untuk update artikel
+![{0D5D2FBB-ECA3-44DB-B363-30207287163C}](https://github.com/user-attachments/assets/b5bd0982-767c-48bb-a744-3bb9128dab73)
+
+I. DELETE /api/articles/{id} - untuk menghapus artikel
+![{DE59687A-64F9-4BED-87D1-B5EED23A5716}](https://github.com/user-attachments/assets/5eec071d-0b22-43c4-a7f3-02f1cd0b13e7)
+
+### F. Database Documentation
+A. Articles
+![{D4197AFF-4862-4D41-BCC0-5A097F591150}](https://github.com/user-attachments/assets/865595de-d916-4275-aeb2-fbb0f1f4d5b0)
+
+B. Categories
+![{76C53D45-A287-4EC7-9D42-1ACA904C2B48}](https://github.com/user-attachments/assets/475013ef-acc8-43eb-9561-14b3dddcf865)
 
 
 
